@@ -2,10 +2,12 @@ import streamlit as st
 import numpy as np
 import pickle
 from tensorflow.keras.models import load_model
-from tensorflow.keras.utils import pad_sequences
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+import tensorflow as tf
 
 ## Load model & tokenizer 
-model=load_model('Bards-Brain.h5')
+model = tf.keras.models.load_model("Bards-Brain.h5")
 
 with open('tokenizer.pickle','rb') as file:
     tokenizer=pickle.load(file)
