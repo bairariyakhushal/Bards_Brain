@@ -1,0 +1,28 @@
+# Python virtual environment
+ml_env/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# TensorFlow logs
+logs/
+
+# Model files
+*.h5
+*.pickle
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
