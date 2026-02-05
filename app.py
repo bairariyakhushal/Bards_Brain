@@ -6,6 +6,10 @@ from tensorflow.keras.utils import pad_sequences
 from keras.models import load_model
 import keras
 import tensorflow as tf
+import sys
+import tensorflow.keras.preprocessing.text as keras_text
+sys.modules['keras.preprocessing.text'] = keras_text
+sys.modules['keras.preprocessing'] = tensorflow.keras.preprocessing
 
 
 # Custom LSTM wrapper to ignore deprecated parameter
@@ -19,7 +23,6 @@ class CustomLSTM(keras.layers.LSTM):
 ## Load model & tokenizer 
 # Load model with custom LSTM that ignores time_major
 model = load_model("Bards-Brain.h5", custom_objects={'LSTM': CustomLSTM})
-
 
 with open('tokenizer.pickle','rb') as file:
     tokenizer=pickle.load(file)
