@@ -3,11 +3,23 @@ import numpy as np
 import pickle
 from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import pad_sequences
-
+from keras.models import load_model
+import keras
 import tensorflow as tf
 
+
+# Custom LSTM wrapper to ignore deprecated parameter
+@keras.saving.register_keras_serializable()
+class CustomLSTM(keras.layers.LSTM):
+    def __init__(self, *args, **kwargs):
+        kwargs.pop('time_major', None)  # Remove the problematic parameter
+        super().__init__(*args, **kwargs)
+        
+        
 ## Load model & tokenizer 
-model = load_model("Bards-Brain.h5")
+# Load model with custom LSTM that ignores time_major
+model = load_model("Bards-Brain.h5", custom_objects={'LSTM': CustomLSTM})
+
 
 with open('tokenizer.pickle','rb') as file:
     tokenizer=pickle.load(file)
